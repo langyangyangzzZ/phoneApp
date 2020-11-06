@@ -27,6 +27,7 @@ class _PhonePageState extends State<PhonePage> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
+        print("SZJ本地图片路径为:${_image}");
         mFlieList.add(_image);
       } else {
         print('No image selected.');

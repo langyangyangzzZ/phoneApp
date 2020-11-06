@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/image.dart';
 import 'package:flutter_app/phone.dart';
 
 void main() {
@@ -11,12 +12,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      darkTheme: ThemeData.dark(),
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
       home: MyHomePage(),
       routes: <String, WidgetBuilder>{
         "phonePage": (BuildContext context) => PhonePage(),
+        "imagePage": (BuildContext context) => ImagePage(),
       },
     );
   }
@@ -41,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             SwitchListTile(
               value: isSwitch,
-              title: Text(isSwitch?"开启路由":"关闭路由"),
+              title: Text(isSwitch ? "开启路由" : "关闭路由"),
               onChanged: (value) {
                 setState(() {
                   print("SZJ:${isSwitch}+${value}");
@@ -49,24 +52,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
             ),
-            RaisedButton(
-              onPressed: () {
-                initButton(PhonePage(),"phonePage");
-              },
-              child: Text("Phone页面"),
-            ),
+            initButton(PhonePage(), "phonePage", "Phone页面"),
+            initButton(ImagePage(), "imagePage", "Image页面"),
           ],
         )
         // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
 
-  void initButton(Widget widgetPage, String title) {
-    if (isSwitch) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => widgetPage));
-    }else{
-      Navigator.pushNamed(context, title);
-    }
-  }
+   initButton(Widget widgetPage, String title, lable) => RaisedButton(
+        onPressed: () {
+          if (isSwitch) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => widgetPage));
+          } else {
+            Navigator.pushNamed(context, title);
+          }
+        },
+        child: Text(lable),
+      );
 }
