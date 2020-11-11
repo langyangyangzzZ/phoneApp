@@ -79,3 +79,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: MaoTi                # 字体别名
+      fonts:
+        - asset: fonts/maoti.ttf  # 字体文件目录
+          weight: 700              # 权重 700表示粗体，相当于bold
+    - family: iconfont                # 字体别名
+      fonts:
+          - asset: fonts/iconfont.ttf  # 字体文件目录
+            weight: 700              # 权重 700表示粗体，相当于bold

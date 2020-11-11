@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/animation.dart';
 import 'package:flutter_app/image.dart';
+import 'package:flutter_app/inkwell.dart';
 import 'package:flutter_app/phone.dart';
 
 void main() {
@@ -13,13 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       darkTheme: ThemeData.dark(),
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
       home: MyHomePage(),
       routes: <String, WidgetBuilder>{
         "phonePage": (BuildContext context) => PhonePage(),
         "imagePage": (BuildContext context) => ImagePage(),
+        "AnimaitonPage": (BuildContext context) => AnimationPage(),
+        "InkWellPage": (BuildContext context) => InkWellPage(),
       },
     );
   }
@@ -54,6 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             initButton(PhonePage(), "phonePage", "Phone页面"),
             initButton(ImagePage(), "imagePage", "Image页面"),
+            initButton(AnimationPage(), "AnimaitonPage", "Animation页面"),
+            initButton(InkWellPage(), "InkWellPage", "InkWell页面"),
           ],
         )
         // This trailing comma makes auto-formatting nicer for build methods.

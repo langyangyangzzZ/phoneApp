@@ -10,6 +10,7 @@ class ImagePage extends StatefulWidget {
 }
 
 class _ImagePageState extends State<ImagePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,24 +21,22 @@ class _ImagePageState extends State<ImagePage> {
           children: [
             Column(
               children: [
-                CachedNetworkImage(
-                    memCacheWidth: 350,
-                    //缓存宽
-                    memCacheHeight: 200,
-                    //缓存高
-                    placeholder: (context, url) {
-                      return CircularProgressIndicator(
-                        backgroundColor: Colors.greenAccent,
-                        valueColor: AlwaysStoppedAnimation(Colors.red),
-                      );
-                    },
-                    imageUrl:
-                        "https://imag2e.springup9.com/image/20200805/epcyoisqmm80000000.jpeg",
-                    //无网络下载图片使用默认图片
-                    errorWidget: (context, url, android) {
-                      print('CachedNetworkImage${url}');
-                      return Icon(Icons.android);
-                    }),
+             CachedNetworkImage(
+
+                      placeholder: (context, url) {
+                        return CircularProgressIndicator(
+                          backgroundColor: Colors.greenAccent,
+                          valueColor: AlwaysStoppedAnimation(Colors.red),
+                        );
+                      },
+                      imageUrl:
+                      "https://image.springup9.com/image/20200805/epcyoisqmm80000000.jpeg",
+                      //无网络下载图片使用默认图片
+                      errorWidget: (context, url, android) {
+                        print('CachedNetworkImage${url}');
+                        return Icon(Icons.android);
+                      }),
+
 
                 //下载网络图片
                 Image.network(
@@ -88,4 +87,5 @@ class _ImagePageState extends State<ImagePage> {
           ],
         ));
   }
+
 }
