@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/HeroDemo.dart';
 import 'package:flutter_app/animation.dart';
 import 'package:flutter_app/image.dart';
 import 'package:flutter_app/inkwell.dart';
@@ -9,7 +10,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
         "imagePage": (BuildContext context) => ImagePage(),
         "AnimaitonPage": (BuildContext context) => AnimationPage(),
         "InkWellPage": (BuildContext context) => InkWellPage(),
+        "HeroPage": (BuildContext context) => HeroPage(),
       },
     );
   }
@@ -57,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
             initButton(ImagePage(), "imagePage", "Image页面"),
             initButton(AnimationPage(), "AnimaitonPage", "Animation页面"),
             initButton(InkWellPage(), "InkWellPage", "InkWell页面"),
+            initButton(HeroPage(), "HeroPage", "Hero动画页面"),
           ],
         )
         // This trailing comma makes auto-formatting nicer for build methods.

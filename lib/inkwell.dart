@@ -7,7 +7,7 @@ class InkWellPage extends StatefulWidget {
 }
 
 class _InkWellPageState extends State<InkWellPage> {
-  bool _isLight = true;//判断是否是夜间模式 true白天 false夜间
+  bool _isLight = true; //判断是否是夜间模式 true白天 false夜间
 
   @override
   Widget build(BuildContext context) {
@@ -18,42 +18,81 @@ class _InkWellPageState extends State<InkWellPage> {
           brightness:
               _isLight == true ? Brightness.light : Brightness.dark //判断 夜间/白天模式
           ),
-
-
       home: Scaffold(
         body: Container(
           alignment: Alignment.center,
           margin: EdgeInsets.symmetric(vertical: 30),
           child: Column(
             children: [
-              RaisedButton(
-                onPressed: () {},
-                child: Text("RaisedButton按钮"),
-              ),
               Ink(
                 decoration: new BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: new BorderRadius.all(new Radius.circular(25)),
-                ),
-                child: InkWell(
-                  focusColor: Colors.tealAccent,
-                  //获取焦点颜色
-                  // highlightColor: Colors.teal, //设置高亮颜色
-                  splashColor: Colors.black,
+                  color: Colors.yellow,
                   borderRadius: new BorderRadius.circular(25),
-                  onTap: () {
+                ),
+
+                  child:   InkWell(
+                    //可以不加
+                    radius: 300,
+                    highlightColor: Colors.teal,
+                    //设置高亮颜色
+                    // splashColor: Colors.black,
+                    //水波纹形状
+                    borderRadius: new BorderRadius.circular(25),
                     //------√------
-                    print('----');
-                  },
-                  child: Container(
-                    width: 200,
-                    height: 50,
-                    alignment: Alignment.center,
-                    child: Text("InkWell"),
+                    onTap: () {
+
+                      print('--单击--');
+                    },
+                    child: Container(
+                      // color: Colors.yellow,这里的颜色不能加!!!
+                      width: 200,
+                      height: 50,
+                      alignment: Alignment.center,
+                      child: Text("InkWell"),
+                    ),
+                  ),
+
+
+              ),
+
+               Material(
+                child: Ink(
+                  decoration: new BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: new BorderRadius.all(new Radius.circular(25)),
+                  ),
+                  child: InkWell(
+                    focusColor: Colors.tealAccent,//没什么用
+                    hoverColor: Colors.amber,//没什么用
+                    radius: 300,
+                    //获取焦点颜色
+                    // highlightColor: Colors.teal, //设置高亮颜色
+                    splashColor: Colors.black,
+                    //水波纹形状
+                    borderRadius: new BorderRadius.circular(25),
+                    //------√------
+                    onTap: () {
+                      print('--单击--');
+                    },
+                    onDoubleTap: (){
+                      print('--双击--');
+                    },
+                    onLongPress: (){
+                      print('--长按--');
+                    },
+                    child: Container(
+                      width: 200,
+                      height: 50,
+                      alignment: Alignment.center,
+                      child: Text("InkWell"),
+                    ),
                   ),
                 ),
               ),
-              Padding(
+
+              //=========================
+
+                Padding(
                 padding: EdgeInsets.only(top: 30),
                 child: new Ink(
                   //设置背景
@@ -72,8 +111,8 @@ class _InkWellPageState extends State<InkWellPage> {
                     highlightShape: BoxShape.rectangle,
                     //  ----√----
 
-                    /*
-                   InkResponse内部的radius这个需要注意的是，
+
+                 /*  InkResponse内部的radius这个需要注意的是，
                     我们需要半径大于控件的宽，如果radius过小，显示的水波纹就是一个很小的圆，
                    */
 
@@ -104,11 +143,15 @@ class _InkWellPageState extends State<InkWellPage> {
                   ),
                 ),
               ),
-              Text(
+
+              //==================================================
+
+             /*   Text(
                 "我是测试Text的",
                 style: TextStyle(fontFamily: "MaoTi"),
-              ),
-              Padding(
+              ),*/
+
+            /*  Padding(
                 padding: EdgeInsets.only(top: 20),
                 child: Ink(
                   decoration: BoxDecoration(
@@ -128,7 +171,11 @@ class _InkWellPageState extends State<InkWellPage> {
                       width: 200,
                       height: 50,
                       alignment: Alignment.center,
-                      child: Text("切换主题",style: TextStyle(fontFamily: "iconfont"),),
+                      child: Text(
+                        "切换主题",
+                        //通过TextStyle中的fontFamily属性设置字体
+                        style: TextStyle(fontFamily: "iconfont"),
+                      ),
                     ),
                     onTap: () {
                       setState(() {
@@ -137,7 +184,7 @@ class _InkWellPageState extends State<InkWellPage> {
                     },
                   ),
                 ),
-              )
+              ),*/
             ],
           ),
         ),
@@ -145,3 +192,5 @@ class _InkWellPageState extends State<InkWellPage> {
     );
   }
 }
+
+
