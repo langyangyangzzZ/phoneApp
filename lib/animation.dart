@@ -8,7 +8,8 @@ class AnimationPage extends StatefulWidget {
 class _AnimationPageState extends State<AnimationPage>
     with SingleTickerProviderStateMixin {
   AnimationController _mAnimationController;
-  Animation<Color> _mAnimation;
+  Animation<double> _mAnimation;
+  Animation<Color> _mAnimationColor;
   double _mAnimationValue;
   AnimationStatus _mAnimationStaus;
 
@@ -20,22 +21,23 @@ class _AnimationPageState extends State<AnimationPage>
       duration: Duration(seconds: 5),
     );
     //设置变化区间 并监听
-    // _mAnimation = new Tween<double>(begin: 0, end: 200)
-    //     //执行曲线 类似于android中的插值器Interpolator 默认Curves.linear
-    //     .chain(new CurveTween(curve: Curves.linear))
-    //     //添加动画控制器
-    //     .animate(_mAnimationController);
-
-    _mAnimation = new ColorTween(begin: Colors.amber, end: Colors.tealAccent)
+    _mAnimation = new Tween<double>(begin: 0, end: 200)
+        //执行曲线 类似于android中的插值器Interpolator 默认Curves.linear
+        .chain(new CurveTween(curve: Curves.bounceIn))
+        //添加动画控制器
         .animate(_mAnimationController);
 
-    /* ..addListener(() {
+    _mAnimationColor =
+        new ColorTween(begin: Colors.amber, end: Colors.tealAccent)
+            .animate(_mAnimationController);
+
+    /*   _mAnimation.addListener(() {
             setState(() {
               print('_mAnimationValue:${_mAnimationValue}');
               _mAnimationValue = _mAnimation.value;
             });
-          })
-          ..addStatusListener((status) {
+          });
+    _mAnimation.addStatusListener((status) {
             setState(() {
               print('status:${status}');
               _mAnimationStaus = status;
@@ -62,8 +64,6 @@ class _AnimationPageState extends State<AnimationPage>
 
   @override
   Widget build(BuildContext context) {
-    print('Colorbuild:${_mAnimation.value}');
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Animaiton"),
@@ -79,26 +79,51 @@ class _AnimationPageState extends State<AnimationPage>
                 //开始
                 _mAnimationController.forward();
               },
-              child: Text("开始"),
+              child: Text(
+                "开始",
+                style: TextStyle(fontSize: 25),
+              ),
             ),
-            AnimationWidget(animaiton: _mAnimation),
+            Container(
+              width: _mAnimationValue,
+              height: _mAnimationValue,
+              child: FlutterLogo(),
+            ),
 
-            AnimatedBuilder(
+            //----------------AnimatedWidget Double start ------------------
+
+            AnimationWidget(
+              animaitonDouble: _mAnimation,
+              isColor: false,
+            ),
+            //----------------AnimatedWidget Double stop ------------------
+
+
+            AnimationWidget(
+              animaitonColor: _mAnimationColor,
+              isColor: true,
+            ),
+
+
+
+            //----------------AnimatedBuilder  start ------------------
+           AnimatedBuilder(
               child: Container(
+                color: Colors.yellow,
                 width: 100,
                 height: 100,
-                child: Text("123",style: TextStyle(color: _mAnimation.value),),
+                child: FlutterLogo(),
               ),
               builder: (BuildContext context, Widget child) {
                 return Container(
-                  width: 100,
-                  height: 100,
-                  color: _mAnimation.value,
+                  width: _mAnimation.value + 100,
+                  height: _mAnimation.value + 100,
                   child: child,
                 );
               },
               animation: _mAnimation,
             )
+            //----------------AnimatedBuilder  stop ------------------
           ],
         ),
       ),
@@ -107,19 +132,41 @@ class _AnimationPageState extends State<AnimationPage>
 }
 
 class AnimationWidget extends AnimatedWidget {
-  // ignore: missing_required_param
-  AnimationWidget({Key key, Animation<Color> animaiton})
-      : super(key: key, listenable: animaiton);
+
+  //isColor true是Animation<Color>类型
+  //        false 是Animation<double>类型
+  bool isColor;
+
+  AnimationWidget(
+      {Key key,
+      Animation<Color> animaitonColor,
+      Animation<double> animaitonDouble,
+      @required this.isColor})
+      : super(key: key, listenable:isColor == true? animaitonColor :animaitonDouble);
+
+  Animation<Color> _mAnimationColor;
+  Animation<double> _mAnimationDouble;
 
   @override
   Widget build(BuildContext context) {
-    Animation<Color> _mAnimation = listenable;
+    //通过父类方法listenable来获取Animation<double>对象
+    if (isColor) {
+      _mAnimationColor = listenable;
+    } else {
+      _mAnimationDouble = listenable;
+    }
 
-    return Container(
-      width: 100,
-      height: 100,
-      color: _mAnimation.value,
-      child: FlutterLogo(),
-    );
+    return isColor == true
+        ? Container(
+            width: 100,
+            height: 100,
+            color: _mAnimationColor.value,
+            child: FlutterLogo(),
+          )
+        : Container(
+            width: _mAnimationDouble.value,
+            height: _mAnimationDouble.value,
+            child: FlutterLogo(),
+          );
   }
 }
