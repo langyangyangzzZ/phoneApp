@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/HeroAnimation.dart';
 import 'package:flutter_app/HeroDemo.dart';
 import 'package:flutter_app/animation.dart';
+import 'package:flutter_app/hero_practice.dart';
 import 'package:flutter_app/image.dart';
 import 'package:flutter_app/inkwell.dart';
 import 'package:flutter_app/phone.dart';
+import 'package:flutter_app/radial_hero_animation.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,6 +25,9 @@ class MyApp extends StatelessWidget {
         "AnimaitonPage": (BuildContext context) => AnimationPage(),
         "InkWellPage": (BuildContext context) => InkWellPage(),
         "HeroPage": (BuildContext context) => HeroPage(),
+        "RadialExpansionPage": (BuildContext context) => RadialExpansionDemo(),
+        "HeroAnimationPage": (BuildContext context) => HeroAnimation(),
+        "HerpPracticePage": (BuildContext context) => HerpPracticePage(),
       },
     );
   }
@@ -59,6 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
             initButton(AnimationPage(), "AnimaitonPage", "Animation页面"),
             initButton(InkWellPage(), "InkWellPage", "InkWell页面"),
             initButton(HeroPage(), "HeroPage", "Hero动画页面"),
+            initButton(RadialExpansionDemo(), "RadialExpansionPage", "径向Hero动画"),
+            initButton(HeroAnimation(), "HeroAnimationPage", "Hero动画(慕课网)"),
+            initButton(HerpPracticePage(), "HerpPracticePage", "Hero动画练习"),
           ],
         )
         // This trailing comma makes auto-formatting nicer for build methods.
