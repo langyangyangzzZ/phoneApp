@@ -7,6 +7,7 @@ import 'package:flutter_app/image.dart';
 import 'package:flutter_app/inkwell.dart';
 import 'package:flutter_app/phone.dart';
 import 'package:flutter_app/radial_hero_animation.dart';
+import 'package:flutter_app/radial_hero_animation_demo.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         "RadialExpansionPage": (BuildContext context) => RadialExpansionDemo(),
         "HeroAnimationPage": (BuildContext context) => HeroAnimation(),
         "HerpPracticePage": (BuildContext context) => HerpPracticePage(),
+        "Radial_hero_animaiton_demo_page": (BuildContext context) => Radial_hero_animaiton_demo_page(),
       },
     );
   }
@@ -68,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
             initButton(RadialExpansionDemo(), "RadialExpansionPage", "径向Hero动画"),
             initButton(HeroAnimation(), "HeroAnimationPage", "Hero动画(慕课网)"),
             initButton(HerpPracticePage(), "HerpPracticePage", "Hero动画练习"),
+            initButton(Radial_hero_animaiton_demo_page(), "Radial_hero_animaiton_demo_page", "径向Hero动画"),
           ],
         )
         // This trailing comma makes auto-formatting nicer for build methods.

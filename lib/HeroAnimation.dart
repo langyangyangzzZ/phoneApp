@@ -30,7 +30,6 @@ class PhotoHero extends StatelessWidget {
 
 class HeroAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
-    timeDilation = 10.0; // 1.0 means normal animation speed.
 
     return Scaffold(
       appBar: AppBar(

@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart' show timeDilation;
 
 //图片样式
 class Photo extends StatelessWidget {
@@ -14,7 +13,7 @@ class Photo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       // Slightly opaque color appears where the image has transparency.
-      //设置图片背景
+      //图片背景色
       color: Theme.of(context).primaryColor.withOpacity(0.25),
       child: InkWell(
           onTap: onTap,
@@ -40,7 +39,8 @@ class RadialExpansion extends StatelessWidget {
     Key key,
     this.maxRadius,
     this.child,
-  })  : clipRectSize = 2.0 * (maxRadius / math.sqrt2),
+  })  : //求大圆宽度 2的平方根 乘2  maxRadius = 132    math.sqrt2 =  1.4142135623730951
+        clipRectSize = 2.0 * (maxRadius / math.sqrt2),
         super(key: key);
 
   final double maxRadius;
@@ -49,22 +49,27 @@ class RadialExpansion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('SZJ1116clipRectSize:${clipRectSize}');
     return ClipOval(
-      child: Center(
-        child: SizedBox(
-          width: clipRectSize,
-          height: clipRectSize,
-          child: ClipRect(
-            child: child,
-          ),
-        ),
-      ),
-    );
+        child: Container(
+            alignment: Alignment.center,
+            color: Colors.amber,
+            child: SizedBox(
+              width: clipRectSize,
+              height: clipRectSize,
+              child: ClipRect(
+                child: child,
+              ),
+            ),
+    ));
   }
 }
 
 class RadialExpansionDemo extends StatelessWidget {
+  //小圆宽度
   static const double kMinRadius = 32.0;
+
+  //大圆宽度
   static const double kMaxRadius = 128.0;
   static const opacityCurve =
       const Interval(0.0, 0.75, curve: Curves.fastOutSlowIn);
@@ -76,6 +81,7 @@ class RadialExpansionDemo extends StatelessWidget {
   static Widget _buildPage(
       BuildContext context, String imageName, String description) {
     return Container(
+      //跳转页面底色
       color: Theme.of(context).canvasColor,
       child: Center(
         child: Card(
@@ -113,8 +119,10 @@ class RadialExpansionDemo extends StatelessWidget {
     );
   }
 
-  Widget _buildHero( BuildContext context, String imageName, String description) {
+  Widget _buildHero(
+      BuildContext context, String imageName, String description) {
     return Container(
+      //小圆宽度
       width: kMinRadius * 2.0,
       height: kMinRadius * 2.0,
       child: Hero(
@@ -150,7 +158,6 @@ class RadialExpansionDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 5.0; // 1.0 is normal animation speed.
 
     return Scaffold(
       appBar: AppBar(
